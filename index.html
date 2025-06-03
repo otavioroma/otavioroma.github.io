@@ -1,87 +1,142 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartão de Visitas Virtual - Otávio Scheidegger</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #eef2f5;
-            margin: 0;
-            padding: 20px; /* Adiciona padding para telas menores */
-            box-sizing: border-box; /* Garante que o padding não cause overflow */
-        }
-        .card {
-            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            padding: 30px;
-            width: 100%; /* Ajusta para ser responsivo */
-            max-width: 380px; /* Largura máxima para desktops */
-            text-align: center;
-            color: #333;
-            animation: fadeIn 1s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        h1 {
-            color: #0056b3;
-            margin-bottom: 8px;
-            font-size: 1.8em;
-            word-wrap: break-word; /* Previne overflow em nomes longos */
-        }
-        h2 {
-            color: #666;
-            font-size: 1.1em;
-            margin-top: 0;
-            margin-bottom: 25px;
-            font-weight: normal;
-            word-wrap: break-word; /* Previne overflow em títulos longos */
-        }
-        p {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 12px 0;
-            font-size: 1.0em;
-            word-wrap: break-word; /* Previne overflow em detalhes */
-        }
-        p strong {
-            margin-right: 8px;
-            color: #555;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            word-wrap: break-word; /* Previne overflow em links */
-        }
-        a:hover {
-            color: #0056b3;
-            text-decoration: underline;
-        }
-        .icon {
-            margin-right: 8px;
-            font-size: 1.2em;
-            color: #007bff;
-            flex-shrink: 0; /* Previne que o ícone encolha */
-        }
-    </style>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Cartão de Visitas Virtual - Otávio Scheidegger</title>
+   <style>
+       body {
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           min-height: 100vh;
+           background-color: #d9c27f; /* Cor de fundo da tela alterada */
+           margin: 0;
+           padding: 20px;
+           box-sizing: border-box;
+           perspective: 1000px; /* Necessário para o efeito 3D de virar */
+       }
+       .card-container {
+           width: 100%;
+           max-width: 380px;
+           height: 320px; /* Altura fixa para evitar pulos ao virar */
+           position: relative;
+           transform-style: preserve-3d;
+           transition: transform 0.8s; /* Transição para o efeito de virar */
+           cursor: pointer; /* Indica que o cartão é clicável */
+       }
+       .card-container.flipped {
+           transform: rotateY(180deg);
+       }
+       .card, .card-back {
+           background-color: #2f4731; /* Cor de fundo do cartão mantida */
+           border-radius: 12px;
+           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+           padding: 30px;
+           width: 100%;
+           height: 100%; /* Ocupa toda a altura do container */
+           text-align: center;
+           color: #f4f3c5; /* Cor da letra mantida */
+           border: 1px solid #6b8e6c;
+           box-sizing: border-box;
+           position: absolute;
+           backface-visibility: hidden; /* Esconde a face de trás durante a rotação */
+           display: flex; /* Usar flexbox para centralizar conteúdo verticalmente */
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+       }
+       .card-back {
+           transform: rotateY(180deg); /* Inverte o verso para que ele comece virado */
+       }
+       /* Conteúdo dentro do cartão para melhor alinhamento */
+       .card-content {
+           width: 100%;
+       }
+
+       h1 {
+           color: #f4f3c5; /* Cor da letra mantida */
+           margin-bottom: 8px;
+           font-size: 1.8em;
+           word-wrap: break-word;
+       }
+       h2 {
+           color: #f4f3c5; /* Cor da letra mantida */
+           font-size: 1.1em;
+           margin-top: 0;
+           margin-bottom: 25px;
+           font-weight: normal;
+           word-wrap: break-word;
+       }
+       p {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           margin: 12px 0;
+           font-size: 1.0em;
+           word-wrap: break-word;
+       }
+       a {
+           color: #f4f3c5; /* Cor da letra mantida */
+           text-decoration: none;
+           transition: color 0.3s ease;
+           word-wrap: break-word;
+       }
+       a:hover {
+           color: #e0dfb9; /* Cor da letra mantida */
+           text-decoration: underline;
+       }
+       .icon {
+           margin-right: 8px;
+           font-size: 1.2em;
+           color: #f4f3c5; /* Cor da letra mantida */
+           flex-shrink: 0;
+       }
+       .qr-code-content {
+           /* Removido padding-top, pois o flexbox já centraliza */
+       }
+       .qr-code-content p {
+           font-size: 0.9em;
+           color: #f4f3c5; /* Cor da letra mantida */
+           margin-bottom: 15px;
+           display: block;
+       }
+       .qr-code-content img {
+           max-width: 180px;
+           height: auto;
+           border-radius: 8px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+           display: block;
+           margin: 0 auto;
+       }
+   </style>
 </head>
 <body>
-    <div class="card">
-        <h1>Otávio Scheidegger</h1>
-        <h2>Engenheiro de Telecomunicações</h2>
-        <p><span class="icon">&#127978;</span> <strong>Trabalha no:</strong> BNDES</p>
-        <p><span class="icon">&#128222;</span> <strong>Tel:</strong> <a href="tel:+5521992283450">+55 21 99228-3450</a></p>
-        <p><span class="icon">&#128231;</span> <strong>E-mail:</strong> <a href="mailto:otavio.roma@bndes.gov.br">otavio.roma@bndes.gov.br</a></p>
-        </div>
+   <div class="card-container" onclick="flipCard()">
+       <div class="card">
+           <div class="card-content">
+               <h1>Otávio Scheidegger</h1>
+               <h2>Engenheiro de Telecomunicações</h2>
+               <p><span class="icon">&#128188;</span> BNDES</p>
+               <p><span class="icon">&#128222;</span> <a href="tel:+5521992283450">+55 21 99228-3450</a></p>
+               <p><span class="icon">&#128231;</span> <a href="mailto:otavio.roma@bndes.gov.br">otavio.roma@bndes.gov.br</a></p>
+           </div>
+       </div>
+
+       <div class="card-back">
+           <div class="qr-code-content">
+               <p>Escaneie para o meu LinkedIn:</p>
+               <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.linkedin.com/in/SEU_USUARIO_LINKEDIN" alt="QR Code para o LinkedIn do Otávio">
+           </div>
+       </div>
+   </div>
+
+   <script>
+       function flipCard() {
+           const cardContainer = document.querySelector('.card-container');
+           cardContainer.classList.toggle('flipped');
+       }
+   </script>
 </body>
 </html>
