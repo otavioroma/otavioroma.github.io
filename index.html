@@ -11,72 +11,70 @@
            justify-content: center;
            align-items: center;
            min-height: 100vh;
-           background-color: #9EA2A2; /* Cor de fundo da tela alterada */
+           background-color: #9EA2A2;
            margin: 0;
            padding: 20px;
            box-sizing: border-box;
-           perspective: 1000px; /* Necessário para o efeito 3D de virar */
+           perspective: 1000px;
        }
-      .card img.corner-logo {
-         position: absolute;
-          top: 10px;
-          left: 10px;
-          width: 40px;
-          height: 40px;
-          border-radius: 4px;
-}
+
        .card-container {
            width: 100%;
            max-width: 380px;
-           height: 320px; /* Altura fixa para evitar pulos ao virar */
+           height: 320px;
            position: relative;
            transform-style: preserve-3d;
-           transition: transform 0.8s; /* Transição para o efeito de virar */
-           cursor: pointer; /* Indica que o cartão é clicável */
+           transition: transform 0.8s;
+           cursor: pointer;
        }
+
        .card-container.flipped {
            transform: rotateY(180deg);
        }
+
        .card, .card-back {
-           background-color: #007A53; /* Cor de fundo do cartão mantida */
+           background-color: #007A53;
            border-radius: 12px;
            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
            padding: 30px;
            width: 100%;
-           height: 100%; /* Ocupa toda a altura do container */
+           height: 100%;
            text-align: center;
-           color: #f4f3c5; /* Cor da letra mantida */
+           color: #f4f3c5;
            border: 1px solid #6b8e6c;
            box-sizing: border-box;
            position: absolute;
-           backface-visibility: hidden; /* Esconde a face de trás durante a rotação */
-           display: flex; /* Usar flexbox para centralizar conteúdo verticalmente */
+           backface-visibility: hidden;
+           display: flex;
            flex-direction: column;
            justify-content: center;
            align-items: center;
        }
+
        .card-back {
-           transform: rotateY(180deg); /* Inverte o verso para que ele comece virado */
+           transform: rotateY(180deg);
        }
-       /* Conteúdo dentro do cartão para melhor alinhamento */
+
        .card-content {
            width: 100%;
        }
 
        h1 {
-           color: #f4f3c5; /* Cor da letra mantida */
+           color: #f4f3c5;
            margin-bottom: 8px;
            font-size: 1.8em;
            word-wrap: break-word;
        }
+
        h2 {
-           color: #f4f3c5; /* Cor da letra mantida */
+           color: #f4f3c5;
            font-size: 1.1em;
            margin-top: 0;
            margin-bottom: 25px;
            font-weight: normal;
            word-wrap: break-word;
        }
+
        p {
            display: flex;
            align-items: center;
@@ -85,31 +83,33 @@
            font-size: 1.0em;
            word-wrap: break-word;
        }
+
        a {
-           color: #f4f3c5; /* Cor da letra mantida */
+           color: #f4f3c5;
            text-decoration: none;
            transition: color 0.3s ease;
            word-wrap: break-word;
        }
+
        a:hover {
-           color: #e0dfb9; /* Cor da letra mantida */
+           color: #e0dfb9;
            text-decoration: underline;
        }
+
        .icon {
            margin-right: 8px;
            font-size: 1.2em;
-           color: #f4f3c5; /* Cor da letra mantida */
+           color: #f4f3c5;
            flex-shrink: 0;
        }
-       .qr-code-content {
-           /* Removido padding-top, pois o flexbox já centraliza */
-       }
+
        .qr-code-content p {
            font-size: 0.9em;
-           color: #f4f3c5; /* Cor da letra mantida */
+           color: #f4f3c5;
            margin-bottom: 15px;
            display: block;
        }
+
        .qr-code-content img {
            max-width: 180px;
            height: auto;
@@ -118,12 +118,42 @@
            display: block;
            margin: 0 auto;
        }
+
+       .header-info {
+           position: absolute;
+           top: 10px;
+           left: 10px;
+           display: flex;
+           align-items: flex-start;
+           gap: 10px;
+           max-width: 90%;
+       }
+
+       .header-info img {
+           width: 40px;
+           height: 40px;
+           border-radius: 4px;
+           flex-shrink: 0;
+       }
+
+       .header-text {
+           color: #f4f3c5;
+           font-size: 0.75em;
+           line-height: 1.2em;
+           text-align: left;
+       }
    </style>
 </head>
 <body>
    <div class="card-container" onclick="flipCard()">
        <div class="card">
-          <img src="IMG_1395.jpeg" alt="Logo Brasil" class="corner-logo">
+           <div class="header-info">
+               <img src="IMG_1395.jpeg" alt="Logo Brasil">
+               <div class="header-text">
+                   <strong>BNDES</strong><br>
+                   Gerência Setorial - Departamento das Indústrias de TI, Telecom e Economia Criativa
+               </div>
+           </div>
            <div class="card-content">
                <h1>Otávio Scheidegger</h1>
                <h2>Engenheiro de Telecomunicações</h2>
@@ -137,8 +167,8 @@
            <div class="qr-code-content">
                <p>Escaneie para o meu LinkedIn:</p>
                <a href="https://www.linkedin.com/in/otavioroma" target="_blank" rel="noopener noreferrer">
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fotavioroma" alt="QR Code para o LinkedIn do Otávio">
-</a>
+                   <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fotavioroma" alt="QR Code para o LinkedIn do Otávio">
+               </a>
            </div>
        </div>
    </div>
