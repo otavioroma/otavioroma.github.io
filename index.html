@@ -17,6 +17,14 @@
            box-sizing: border-box;
            perspective: 1000px; /* Necessário para o efeito 3D de virar */
        }
+      .card img.corner-logo {
+         position: absolute;
+          top: 10px;
+          left: 10px;
+          width: 20px;
+          height: 20px;
+          border-radius: 4px;
+}
        .card-container {
            width: 100%;
            max-width: 380px;
@@ -113,9 +121,9 @@
    </style>
 </head>
 <body>
-   <img src="IMG_1395.jpeg" alt="Logo Brasil" style="position: absolute; top: 10px; right: 10px; width: 20px; height: 20px;">
    <div class="card-container" onclick="flipCard()">
        <div class="card">
+          <img src="IMG_1395.jpeg" alt="Logo Brasil" class="corner-logo">
            <div class="card-content">
                <h1>Otávio Scheidegger</h1>
                <h2>Engenheiro de Telecomunicações</h2>
