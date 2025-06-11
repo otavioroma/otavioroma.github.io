@@ -1,178 +1,188 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Cartão de Visitas Virtual - Otávio Scheidegger</title>
-   <style>
-       body {
-           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           min-height: 100vh;
-           background-color: #9EA2A2;
-           margin: 0;
-           padding: 20px;
-           box-sizing: border-box;
-           perspective: 1000px;
-       }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartão de Visitas Virtual - Otávio Scheidegger</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #9EA2A2;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      perspective: 1000px;
+    }
 
-       .card-container {
-           width: 100%;
-           max-width: 380px;
-           height: 320px;
-           position: relative;
-           transform-style: preserve-3d;
-           transition: transform 0.8s;
-           cursor: pointer;
-       }
+    .card-container {
+      width: 100%;
+      max-width: 380px;
+      height: 320px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      cursor: pointer;
+    }
 
-       .card-container.flipped {
-           transform: rotateY(180deg);
-       }
+    .card-container.flipped {
+      transform: rotateY(180deg);
+    }
 
-       .card, .card-back {
-           background-color: #007A53;
-           border-radius: 12px;
-           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-           padding: 30px;
-           width: 100%;
-           height: 100%;
-           text-align: center;
-           color: #f4f3c5;
-           border: 1px solid #6b8e6c;
-           box-sizing: border-box;
-           position: absolute;
-           backface-visibility: hidden;
-           display: flex;
-           flex-direction: column;
-           justify-content: space-between;
-           align-items: center;
-       }
+    .card, .card-back {
+      background-color: #007A53;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+      padding: 30px;
+      width: 100%;
+      height: 100%;
+      color: #f4f3c5;
+      border: 1px solid #6b8e6c;
+      box-sizing: border-box;
+      position: absolute;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-       .card-back {
-           transform: rotateY(180deg);
-       }
+    .card-back {
+      transform: rotateY(180deg);
+    }
 
-       .card-content {
-           display: flex;
-           flex-direction: column;
-           justify-content: center;
-           align-items: center;
-           flex: 0 0 auto;
-           margin-top: auto;
-           margin-bottom: auto;
-       }
+    .card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
-       h1 {
-           color: #f4f3c5;
-           margin-bottom: 2px;
-           font-size: 1.2em;
-           word-wrap: break-word;
-       }
+    h1 {
+      margin-bottom: 2px;
+      font-size: 1.2em;
+      word-wrap: break-word;
+    }
 
-       h2 {
-           color: #f4f3c5;
-           font-size: 1.0em;
-           margin-top: 0;
-           margin-bottom: 0;
-           font-weight: normal;
-           word-wrap: break-word;
-       }
+    h2 {
+      font-size: 1.0em;
+      margin: 0;
+      font-weight: normal;
+      word-wrap: break-word;
+    }
 
-       .contact-info {
-           font-size: 0.90em;
-           text-align: center;
-       }
+    .separator {
+      width: 50%;
+      height: 1px;
+      background-color: #f4f3c5;
+      opacity: 0.5;
+      margin: 10px auto 6px auto;
+    }
 
-       a {
-           color: #f4f3c5;
-           text-decoration: none;
-           transition: color 0.3s ease;
-           word-wrap: break-word;
-       }
+    .contact-info {
+      font-size: 0.90em;
+      text-align: center;
+      margin: 0;
+      padding-bottom: 0;
+    }
 
-       a:hover {
-           color: #e0dfb9;
-           text-decoration: underline;
-       }
+    .contact-info p {
+      margin: 2px 0;
+    }
 
-       .qr-code-content p {
-           font-size: 0.9em;
-           color: #f4f3c5;
-           margin-bottom: 15px;
-           display: block;
-       }
+    a {
+      color: #f4f3c5;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      word-wrap: break-word;
+    }
 
-       .qr-code-content img {
-           max-width: 180px;
-           height: auto;
-           border-radius: 8px;
-           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-           display: block;
-           margin: 0 auto;
-       }
+    a:hover {
+      color: #e0dfb9;
+      text-decoration: underline;
+    }
 
-       .header-info {
-           position: absolute;
-           top: 10px;
-           left: 10px;
-           display: flex;
-           align-items: flex-start;
-           gap: 10px;
-           max-width: 90%;
-       }
+    .qr-code-content p {
+      font-size: 0.9em;
+      color: #f4f3c5;
+      margin-bottom: 15px;
+      display: block;
+    }
 
-       .header-info img {
-           width: 40px;
-           height: 40px;
-           border-radius: 4px;
-           flex-shrink: 0;
-       }
+    .qr-code-content img {
+      max-width: 180px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: block;
+      margin: 0 auto;
+    }
 
-       .header-text {
-           color: #f4f3c5;
-           font-size: 0.75em;
-           line-height: 1.2em;
-           text-align: left;
-       }
-   </style>
+    .header-info {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      max-width: 90%;
+    }
+
+    .header-info img {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .header-text {
+      font-size: 0.75em;
+      line-height: 1.2em;
+      text-align: left;
+    }
+  </style>
 </head>
 <body>
-   <div class="card-container" onclick="flipCard()">
-       <div class="card">
-           <div class="header-info">
-               <img src="IMG_1395.jpeg" alt="Logo Brasil">
-               <div class="header-text">
-                   <strong>BNDES</strong><br>
-                   Departamento das Indústrias de TI, Telecom e Economia Criativa
-               </div>
-           </div>
-           <div class="card-content">
-               <h1>Otávio Scheidegger</h1>
-               <h2>Engenheiro de Telecomunicações</h2>
-           </div>
-           <div class="contact-info">
-               <p><a href="tel:+5521992283450">+55 21 99228-3450</a></p>
-               <p><a href="mailto:otavio.roma@bndes.gov.br">otavio.roma@bndes.gov.br</a></p>
-           </div>
-       </div>
+  <div class="card-container" onclick="flipCard()">
+    <div class="card">
+      <div class="header-info">
+        <img src="IMG_1395.jpeg" alt="Logo Brasil">
+        <div class="header-text">
+          <strong>BNDES</strong><br>
+          Departamento das Indústrias de TI, Telecom e Economia Criativa
+        </div>
+      </div>
 
-       <div class="card-back">
-           <div class="qr-code-content">
-               <a href="https://www.linkedin.com/in/otavioroma" target="_blank" rel="noopener noreferrer">
-                   <img src="qrcode_linkedin.png" alt="QR Code para o LinkedIn do Otávio">
-               </a>
-           </div>
-       </div>
-   </div>
+      <div class="card-content">
+        <h1>Otávio Scheidegger</h1>
+        <h2>Engenheiro de Telecomunicações</h2>
+      </div>
 
-   <script>
-       function flipCard() {
-           const cardContainer = document.querySelector('.card-container');
-           cardContainer.classList.toggle('flipped');
-       }
-   </script>
+      <div class="separator"></div>
+
+      <div class="contact-info">
+        <p><a href="tel:+5521992283450">+55 21 99228-3450</a></p>
+        <p><a href="mailto:otavio.roma@bndes.gov.br">otavio.roma@bndes.gov.br</a></p>
+      </div>
+    </div>
+
+    <div class="card-back">
+      <div class="qr-code-content">
+        <a href="https://www.linkedin.com/in/otavioroma" target="_blank" rel="noopener noreferrer">
+          <img src="qrcode_linkedin.png" alt="QR Code para o LinkedIn do Otávio">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function flipCard() {
+      const cardContainer = document.querySelector('.card-container');
+      cardContainer.classList.toggle('flipped');
+    }
+  </script>
 </body>
 </html>
