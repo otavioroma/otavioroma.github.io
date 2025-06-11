@@ -47,7 +47,7 @@
            backface-visibility: hidden;
            display: flex;
            flex-direction: column;
-           justify-content: center;
+           justify-content: space-between;
            align-items: center;
        }
 
@@ -56,18 +56,19 @@
        }
 
        .card-content {
-           width: 100%;
-           flex-grow: 1;
            display: flex;
            flex-direction: column;
            justify-content: center;
            align-items: center;
+           flex: 0 0 auto;
+           margin-top: auto;
+           margin-bottom: auto;
        }
 
        h1 {
            color: #f4f3c5;
-           margin-bottom: 5px;
-           font-size: 1.2em; /* fonte reduzida */
+           margin-bottom: 2px;
+           font-size: 1.2em;
            word-wrap: break-word;
        }
 
@@ -83,8 +84,6 @@
        .contact-info {
            font-size: 0.90em;
            text-align: center;
-           margin-top: auto;
-           padding-top: 20px;
        }
 
        a {
